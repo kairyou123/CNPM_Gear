@@ -1,0 +1,7 @@
+﻿@{
+    if (Context.Request.Path.StartsWithSegments("/admin", StringComparison.OrdinalIgnoreCase))
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    else
+        Layout = "~/Views/Shared/_ClientLayout.cshtml";
+}
+

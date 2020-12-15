@@ -1,0 +1,33 @@
+﻿
+@using Application.Services
+@section Content{
+    <script type="text/javascript" src="~/js/Home/Cart.js"></script>
+    <div class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading text-uppercase">SHOPPING CART</h1>
+        </div>
+    </div>
+    <div class="row cart">
+
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-cart" id="giohang-content">
+                    
+                </table>
+            </div>
+        </div>
+        <div class="col mb-2">
+            <div class="row">
+                <div class="col-sm-12  col-md-6">
+                    <button class="btn btn-lg btn-block btn-light" onclick="window.location.href='/'">
+                        <i class="fas fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;Tiếp tục mua
+                        hàng
+                    </button>
+                </div>
+                <div class="col-sm-12 col-md-6 text-right" id="thanhtoanbtn">
+                    <button class="btn btn-lg btn-block btn-danger text-uppercase" onclick="window.location.href='/user/checkout'">Thanh toán</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

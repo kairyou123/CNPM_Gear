@@ -1,0 +1,110 @@
+﻿@using Application.Services
+@model Application.DTO.LinhKienDTO
+@section Content{
+
+    <script type="text/javascript" src="~/js/Home/Detail.js"></script>
+    <div>
+        <!-- Products -->
+        <div class="product-detail" id="product-detail">
+            <div class="product-detail-title">
+                <h1>@Model.TenLK</h1>
+            </div>
+
+            <div class="product-detail-content row">
+                <div class="product-detail-content-products col-md-6">
+                    <div id="custCarousel" class="carousel slide" data-ride="carousel" align="center">
+                        <!-- slides -->
+                        <div class="carousel-inner">
+                            @{
+                                var hinhs = Model.Hinh.Split(",");
+                                bool first = true;
+                            }
+                            @foreach (var item in hinhs)
+                            {
+                                <div class="carousel-item @(first ? "active" : "")"> <img src="~/images/products/@item" alt="Hills"> </div>
+                                first = false;
+                            }
+                        </div>
+                        <!-- Left right -->
+                        <a class="carousel-control-prev" href="#custCarousel" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#custCarousel" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+                        <!-- Thumbnails -->
+                        <ol class="carousel-indicators list-inline">
+                            @{first = true;var count = 0;}
+                            @foreach (var item in hinhs)
+                            {
+                                <li class="list-inline-item @(first ? "active" : "")">
+                                    <a id="carousel-selector-@(count)" data-slide-to="@(count)"
+                                       data-target="#custCarousel"> <img src="~/images/products/@item" class="img-fluid"> </a>
+                                </li>
+                                first = false;
+                                count++;
+                            }
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="product-detail-content-products col-md-6 m-0">
+                    <div class="">
+                        <div class="product-detail-content-products-name">
+                            <h2><span class="name">@Model.TenLK</span></h2>
+                        </div>
+                        <div class="products-sold float-right">
+                            <span>Đã bán @Model.DaBan</span>
+                        </div>
+                        <div class="product-detail-content-products-producer">
+                            <h2>Hãng sản xuất: <span class="producer">@Model.NCC.TenNCC</span></h2>
+                        </div>
+                        @{
+                            var sale = (decimal)Model.DonGias.FirstOrDefault().GiamGia;
+                            var price = Model.DonGias.FirstOrDefault().DonGiaBan;
+                            bool hethang = Model.SLTonKho < 1;
+                        }
+                        <div class="product-detail-content-products-price">
+                            <p>Giá: <span class="price">@Format.Money(price)</span></p>
+                        </div>
+                        <div class="product-detail-content-products-price-sale">
+                            <b>Khuyến mãi: <span class="price-sale">@Format.Money(price - price * sale / 100)</span></b>
+                        </div>
+                        <div class="product-detail-content-products-btn">
+                            <p>Số lượng: </p><input type="number" id="product_num" value="1" min="1" max="@Model.SLTonKho" onblur="updateCartItem()" step="1" class="number" disabled=@hethang />
+                            <span> | </span>
+                            @if (hethang)
+                            {
+                                <span class="out-of-stock">Hết hàng</span>
+                            }
+                            else
+                            {
+                                <span>@Model.SLTonKho đơn vị có sẵn</span>
+                            }
+                            <br>
+                            <button type="button" disabled=@hethang class="btn btn-danger btn-lg buy-now" onclick="addToCart(@Model.Id,$('#product_num').val())">Đặt hàng</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-tab">
+                <ul class="nav nav-tabs m-0" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#menu1">Mô tả sản phẩm </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="menu1" class="container tab-pane active">
+                        <br>
+                        <h3>@Model.TenLK</h3>
+                        <p>
+                            @Html.Raw(Model.MoTa)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

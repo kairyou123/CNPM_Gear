@@ -1,0 +1,142 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<Domain.Entity.ApplicationUser> userManager;
+@inject SignInManager<Domain.Entity.ApplicationUser> signInManager;
+
+@{
+    var user = await userManager.GetUserAsync(User);
+    var displayName = user.HoTen;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    @RenderSection("Styles", false)
+    <link rel="stylesheet" href="~/css/gear.css" type="text/css">
+    <link rel="stylesheet" href="~/css/gear-admin.css" type="text/css">
+    <link rel="stylesheet" href="~/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/main.css" type="text/css">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/fontawesome.min.css">
+    <link rel="stylesheet" href="~/css/swiper.min.css">
+    <link rel="stylesheet" href="~/css/svg-with-js.css">
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <link rel="stylesheet" href="~/css/brands.min.css">
+    <link rel="stylesheet" href="~/css/regular.min.css">
+    <link rel="stylesheet" href="~/css/svg-with-js.css">
+    <link rel="stylesheet" href="~/css/solid.min.css">
+    <link rel="stylesheet" href="~/css/v4-shims.min.css">
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="gear-admin">
+        <div class="admin-right">
+            <div class="admin-user">
+                <div class="admin-user-text">
+                    <span class="admin-user-name">@displayName</span> <img src="~/images/admin.png" height="40px">
+                </div>
+            </div>
+            @RenderBody()
+            @RenderSection("Content", false)
+        </div>
+        <div class="admin-left col-3">
+            <div class="admin-logo-box" style="text-align: center;">
+                <a href="/" style="line-height: 70px; color:white; text-align: center; font-size: 30px">GEAR SHOP</a>
+            </div>
+            <div class="admin-left-menu">
+                <a class="dashboard" href="@Url.Action("Index","Dashboard")">
+                    <div class="menu-section row">
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col-3 text-center"><i class="fa fa-dashboard"></i></div><span
+                                    class="menu-text">Tổng quan</span>
+                            </div>
+                        </div>
+                        <div class="col-2"><span class="padding-right-5"><i
+                                    class="fas fa-arrow-circle-right"></i></span></div>
+                    </div>
+                </a>
+                <a class="taikhoan" href="/admin/user">
+                    <div class="menu-section row" id="admin-user">
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col-3 text-center"><i class="fas fa-user"></i></div><span class="menu-text">
+                                    Người
+                                    dùng
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-2"><span class="padding-right-5"><i
+                                    class="fas fa-arrow-circle-right"></i></span></div>
+                    </div>
+                </a>
+                <a class="loaitaikhoan" href="@Url.Action("Index","Role")">
+                    <div class="menu-section row" id="admin-user">
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col-3 text-center"><i class="fas fa-user-tag"></i></div><span
+                                    class="menu-text">
+                                    Loại tài khoản
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-2"><span class="padding-right-5"><i
+                                    class="fas fa-arrow-circle-right"></i></span></div>
+                    </div>
+                </a><a class="sanpham" href="@Url.Action("Index","Product")">
+                    <div class="menu-section row">
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col-3 text-center"><i class="fab fa-product-hunt font-size-20"></i></div>
+                                <span class="menu-text">Sản phẩm</span>
+                            </div>
+                        </div>
+                        <div class="col-2"><span class="padding-right-5"><i
+                                    class="fas fa-arrow-circle-right"></i></span></div>
+                    </div>
+                </a><a class="chungloai" href="@Url.Action("Index","Category")">
+                    <div class="menu-section row">
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col-3 text-center"><i class="fas fa-box font-size-20"></i></div><span
+                                    class="menu-text">Chủng loại</span>
+                            </div>
+                        </div>
+                        <div class="col-2"><span class="padding-right-5"><i
+                                    class="fas fa-arrow-circle-right"></i></span></div>
+                    </div>
+                </a><a class="nhacungcap" href="@Url.Action("Index","Manufactuer")">
+                    <div class="menu-section row">
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col-3 text-center"><i class="fas fa-industry font-size-20"></i></div><span
+                                    class="menu-text">Nhà sản xuất</span>
+                            </div>
+                        </div>
+                        <div class="col-2"><span class="padding-right-5"><i
+                                    class="fas fa-arrow-circle-right"></i></span></div>
+                    </div>
+                </a><a class="hoadon" href="@Url.Action("Index","DonHang")">
+                    <div class="menu-section row">
+                        <div class="col-9">
+                            <div class="row">
+                                <div class="col-3 text-center"><i class="fas fa-clipboard-list font-size-20"></i></div>
+                                <span class="menu-text">Đơn hàng</span>
+                            </div>
+                        </div>
+                        <div class="col-2"><span class="padding-right-5"><i
+                                    class="fas fa-arrow-circle-right"></i></span></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+@RenderSection("Scripts", false)
