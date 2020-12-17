@@ -102,7 +102,7 @@
                                                                     </td>
                                                                     <td class="table-orders--quantily">@cthd.SoLuongBan</td>
                                                                     @{
-                                                                        var price = cthd.SoLuongBan * cthd.DonGia;
+                                                                        var price = cthd.DonGia;
                                                                         total += price;
                                                                     }
                                                                     <td class="table-orders--price text-center">@Format.Money(price)</td>
